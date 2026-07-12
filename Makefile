@@ -5,7 +5,7 @@ CC = mpicc
 CFLAGS = -fopenmp -Wall
 
 # Nome do executável final
-TARGET = trabalho_final
+TARGET = exec
 
 all: $(TARGET)
 
