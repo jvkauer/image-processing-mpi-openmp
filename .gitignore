@@ -1,0 +1,12 @@
+# Ignorar arquivos executáveis do Windows
+*.exe
+# Ignorar arquivos executáveis do Linux/Mac (caso compile no Xivoco)
+*.out
+*.o
+processador
+trabalho_final
+# Ignorar as imagens gigantes para não travar o seu GitHub!
+*.ppm
+# Caso você tenha logs ou arquivos temporários
+*.log
+.vscode/

@@ -5,11 +5,22 @@
 
 void skip_comments(FILE *fp) {
     int ch;
-    char line[100];
-    while ((ch = fgetc(fp)) != EOF && ch == '#') {
-        fgets(line, sizeof(line), fp);
+    while (1) {
+        // O espaço em branco no fscanf faz ele pular todas as quebras 
+        // de linha, espaços e tabs automaticamente!
+        fscanf(fp, " "); 
+        
+        ch = fgetc(fp); // Pega o próximo caractere útil
+        
+        if (ch == '#') {
+            // Se for um '#', joga tudo fora até o final da linha
+            while ((ch = fgetc(fp)) != '\n' && ch != EOF);
+        } else {
+            // Se for um número (como o 960), devolve ele pro arquivo e sai
+            ungetc(ch, fp);
+            break;
+        }
     }
-    fseek(fp, -1, SEEK_CUR); // Volta o cursor 1 posição
 }
 
 Image ler_imagem(const char *filename) {
