@@ -1,5 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <mpi.h>
+#include <omp.h>
+#include "ppm.h" // Importa a biblioteca que criei para os arquivos imagem ppm
+
+
 
 int imageProcessing(int worldSize, int myRank){
 
