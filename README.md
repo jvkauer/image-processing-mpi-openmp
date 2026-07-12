@@ -4,7 +4,7 @@ Este repositório contém a implementação de um filtro de imagens (conversão 
 
 ## Arquitetura da Solução
 
-O principal desafio técnico do projeto foi a execução em um cluster onde os nós não compartilham o mesmo sistema de arquivos. Para solucionar o gargalo de I/O e evitar falhas de leitura, foi adotada a arquitetura Mestre-Trabalhador (Master-Worker):
+O principal desafio técnico do projeto foi a execução em um cluster onde os nós não compartilham o mesmo sistema de arquivos. Para solucionar o gargalo de I/O e evitar falhas de leitura, foi adotada a arquitetura (Master-Worker):
 
 1. **I/O Centralizado:** O Processo Mestre (Rank 0) é o único responsável por realizar a leitura do arquivo original em disco e alocar a estrutura de dados.
 2. **Distribuição (MPI):** Utilizou-se a rotina coletiva `MPI_Scatter` para particionar e distribuir a matriz de pixels de forma equitativa entre os processos instanciados na rede.
