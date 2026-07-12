@@ -35,19 +35,10 @@ int imageProcessing(int worldSize, int myRank){
 
     #pragma omp parallel for
     for (int i = 0; i < pixels_por_processo; i++) {
-        unsigned char original_r = meu_pedaco[i].r;
-        unsigned char original_g = meu_pedaco[i].g;
-        unsigned char original_b = meu_pedaco[i].b;
-
-        // Fórmula matemática padrão do Sépia
-        int tr = (int)(0.393 * original_r + 0.769 * original_g + 0.189 * original_b);
-        int tg = (int)(0.349 * original_r + 0.686 * original_g + 0.168 * original_b);
-        int tb = (int)(0.272 * original_r + 0.534 * original_g + 0.131 * original_b);
-
-        // O valor não pode passar de 255
-        meu_pedaco[i].r = (tr > 255) ? 255 : tr;
-        meu_pedaco[i].g = (tg > 255) ? 255 : tg;
-        meu_pedaco[i].b = (tb > 255) ? 255 : tb;
+        int media = (meu_pedaco[i].r + meu_pedaco[i].g + meu_pedaco[i].b) / 3;
+        meu_pedaco[i].r = media;
+        meu_pedaco[i].g = media;
+        meu_pedaco[i].b = media;
     }
 
     // Todos enviam as fatias prontas de volta para o Mestre (Gather)
