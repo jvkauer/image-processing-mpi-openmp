@@ -11,6 +11,18 @@ O principal desafio técnico do projeto foi a execução em um cluster onde os n
 3. **Processamento Multithread (OpenMP):** Cada nó recebe sua carga de dados e utiliza a diretiva `#pragma omp parallel for` para fatiar o processamento do filtro entre as threads do processador local.
 4. **Reagrupamento:** Os dados processados são remontados no Mestre através do `MPI_Gather`, que realiza a escrita do arquivo de saída final no disco.
 
+## Processamento do Filtro (Escala de Cinza)
+
+A aplicação do filtro de escala de cinza foi escolhida por ser um problema classificado como **embaraçosamente paralelo** (*embarrassingly parallel*). Isso significa que cada pixel da imagem é processado de forma totalmente independente de seus vizinhos, eliminando a necessidade de comunicação de fronteira (troca de *ghost cells*) entre os processos MPI durante a etapa de cálculo.
+
+O processamento aritmético local em cada thread do OpenMP consiste em extrair a média de luminosidade dos canais de cor e reatribuí-la para formar um tom neutro:
+```c
+int media = (pixel.r + pixel.g + pixel.b) / 3;
+pixel.r = media;
+pixel.g = media;
+pixel.b = media;
+```
+
 ## Tecnologias e Formato
 - **Linguagem:** C
 - **Bibliotecas:** `mpi.h` e `omp.h`
