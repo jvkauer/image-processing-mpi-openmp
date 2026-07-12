@@ -41,7 +41,7 @@ make
 ### Execução
 Para disparar o processamento (exemplo utilizando 4 processos):
 ```bash
-mpirun -n 4 ./trabalho_final
+mpirun -n 4 ./exec
 ```
 
 Ao término da execução, o sistema gerará automaticamente o arquivo `saida.ppm` no mesmo diretório, contendo a imagem com o filtro aplicado.
