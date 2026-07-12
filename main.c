@@ -70,7 +70,7 @@ int imageProcessing(int worldSize, int myRank){
 
 int main(int argc, char** argv){
 
-    int worldSize, myRank, aux, dest;
+    int worldSize, myRank;
 
     MPI_Init(NULL, NULL);
 
